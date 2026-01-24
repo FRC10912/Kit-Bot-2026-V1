@@ -25,7 +25,7 @@ import frc.robot.subsystems.CANFuelSubsystem;
 public class RobotContainer {
   // The robot's subsystems
   private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
-  private final CANFuelSubsystem ballSubsystem = new CANFuelSubsystem();
+  // private final CANFuelSubsystem ballSubsystem = new CANFuelSubsystem();
 
   // The driver's controller
   private final CommandXboxController driverController = new CommandXboxController(
@@ -47,7 +47,7 @@ public class RobotContainer {
     // Set the options to show up in the Dashboard for selecting auto modes. If you
     // add additional auto modes you can add additional lines here with
     // autoChooser.addOption
-    autoChooser.setDefaultOption("Autonomous", Autos.exampleAuto(driveSubsystem, ballSubsystem));
+    autoChooser.setDefaultOption("Autonomous", Autos.exampleAuto(driveSubsystem));
   }
 
   /**
