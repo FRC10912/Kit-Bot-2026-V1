@@ -16,10 +16,20 @@ public final class Autos {
         // Drive backwards for .25 seconds. The driveArcadeAuto command factory
         // creates a command which does not end which allows us to control
         // the timing using the withTimeout decorator
-        driveSubsystem.driveArcade(() -> 0.5, () -> 0).withTimeout(.25),
-        // Stop driving. This line uses the regular driveArcade command factory so it
-        // ends immediately after commanding the motors to stop
+
+        // Negative is forward for this bot (see about changing.)
+        driveSubsystem.driveArcade(() -> -0.4, () -> 0).withTimeout(2),    // forward
+        driveSubsystem.driveArcade(() -> -0.2, () -> 0.4).withTimeout(1),  // 90 right
+        driveSubsystem.driveArcade(() -> -0.4, () -> 0).withTimeout(1),    // forward
+        driveSubsystem.driveArcade(() -> -0.2, () -> -0.4).withTimeout(1), // 90 left
+        driveSubsystem.driveArcade(() -> -0.4, () -> 0).withTimeout(1),    // forward
+        driveSubsystem.driveArcade(() -> -0.2, () -> -0.4).withTimeout(1), // 90 left
+        driveSubsystem.driveArcade(() -> -0.4, () -> 0).withTimeout(1),    // forward
+        driveSubsystem.driveArcade(() -> -0.2, () -> 0.4).withTimeout(1),  // 90 right
+        driveSubsystem.driveArcade(() -> -0.4, () -> 0).withTimeout(1),    // forward
+        driveSubsystem.driveArcade(() -> 0.4, () -> 0).withTimeout(2),     // backwards
         driveSubsystem.driveArcade(() -> 0, () -> 0));
+
 
         // --- Not in use --- 
         // // Spin up the launcher for 1 second and then launch balls for 9 seconds, for a
