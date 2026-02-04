@@ -55,7 +55,15 @@ public final class Constants {
 
     // This value is multiplied by the joystick value when driving the robot to
     // help avoid driving and turning too fast and being difficult to control
-    public static final double DRIVE_SCALING = .5;
-    public static final double ROTATION_SCALING = .5;
+    public static final double DRIVE_SCALING = 1.0; //0.5
+    public static final double ROTATION_SCALING = 1.0; //0.5
+
+  }
+  public static final class DriveDistanceConstants {
+    public static final double Big_Tooth_Size = 55; 
+    public static final double Small_Tooth_Size = 24; 
+    public static final double Drive_Gear_Ratio = (Big_Tooth_Size / Small_Tooth_Size);
+    public static final double Drive_Wheel_Diameter = 6; //Note: Wheel Diameter is measured in Inches
+    public static final double Drive_Wheel_Circumference = 3.14159265359 * Drive_Wheel_Diameter ;
   }
 }
