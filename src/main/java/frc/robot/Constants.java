@@ -60,10 +60,13 @@ public final class Constants {
 
   }
   public static final class DriveDistanceConstants {
-    public static final double Big_Tooth_Size = 55; 
-    public static final double Small_Tooth_Size = 24; 
+    public static final double Big_Tooth_Size = 48; 
+    public static final double Small_Tooth_Size = 16; 
     public static final double Drive_Gear_Ratio = (Big_Tooth_Size / Small_Tooth_Size);
     public static final double Drive_Wheel_Diameter = 6; //Note: Wheel Diameter is measured in Inches
     public static final double Drive_Wheel_Circumference = 3.14159265359 * Drive_Wheel_Diameter ;
+    public static final double Drive_Distance_Variable = Drive_Gear_Ratio * Drive_Wheel_Circumference; // Note: this is the robot will travel in inches
+ 
+
   }
 }
