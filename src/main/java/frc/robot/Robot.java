@@ -5,11 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.hal.HAL;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
+import frc.robot.LimelightHelpers;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -61,6 +65,19 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    double tx = LimelightHelpers.getTX("limelight");
+    double ty = LimelightHelpers.getTY("limelight");
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); // or your table name
+    double ntx = table.getEntry("tx").getDouble(0.0);
+    double nty = table.getEntry("ty").getDouble(0.0);
+
+    SmartDashboard.putNumber("NT tx", ntx);
+    SmartDashboard.putNumber("NT ty", nty);
+
+    SmartDashboard.putNumber("Limelight TX", tx);
+    SmartDashboard.putNumber("Limelight TY", ty);
+    System.out.println (tx);
+    System.out.println (ty);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
