@@ -40,12 +40,17 @@ public final class Constants {
     // Voltage values for various fuel operations. These values may need to be tuned
     // based on exact robot construction.
     // See the Software Guide for tuning information
-    public static final double INTAKING_FEEDER_VOLTAGE = -12;
-    public static final double INTAKING_INTAKE_VOLTAGE = -10/2;
-    public static final double LAUNCHING_FEEDER_VOLTAGE = 9;
-    public static final double LAUNCHING_LAUNCHER_VOLTAGE = -10.6;
-    public static final double SPIN_UP_FEEDER_VOLTAGE = -6;
-    public static final double SPIN_UP_SECONDS = 1;
+    public static final double INTAKING_FEEDER_VOLTAGE = 12;
+    public static final double INTAKING_INTAKE_VOLTAGE = -10;
+    public static final double LAUNCHING_FEEDER_VOLTAGE = -12;
+    // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -12; // mid-field distance - 149in from front of robot. ty= +11.9deg.
+    // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -10.5; // mid-field distance - 120in from front of robot. ty= +7.75deg.
+    // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.75; // mid-field distance - 96in from front of robot.
+    // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.25; // mid-field distance - 84in from front of robot.
+    // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.00; // mid-field distance - 72in from front of robot.
+    public static final double LAUNCHING_LAUNCHER_VOLTAGE = -8.00; // mid-field distance - 36in from front of robot.
+    public static final double SPIN_UP_FEEDER_VOLTAGE = 6;
+    public static final double SPIN_UP_SECONDS = 1.5;
   }
 
   public static final class OperatorConstants {
@@ -56,12 +61,12 @@ public final class Constants {
 
     // This value is multiplied by the joystick value when driving the robot to
     // help avoid driving and turning too fast and being difficult to control
-    public static final double DRIVE_SCALING = .5;
-    public static final double ROTATION_SCALING = .5;
+    public static final double DRIVE_SCALING = .75;
+    public static final double ROTATION_SCALING = 0.6;
   }
 
   public static final class Variables {
-    public static double drive_speed_multiplier = 1.0;  // Allows for variable driving speed.
-    public static double shoot_speed_multiplier = 1.0;  // Allows for variable speed shooting.
+    public static double drive_speed_multiplier = -1.0;  // Allows for variable driving speed.
+    public static double shoot_speed_multiplier = -1.0;  // Allows for variable speed shooting.
   }
 }
