@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.DriveConstants.*;
+import static frc.robot.Constants.Variables.drive_speed_multiplier;;
 
 public class CANDriveSubsystem extends SubsystemBase {
   private final SparkMax leftLeader;
@@ -28,10 +29,10 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   public CANDriveSubsystem() {
     // create brushed motors for drive
-    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushed);
-    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushed);
-    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushed);
-    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushless);
+    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushless);
+    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushless);
+    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushless);
 
     // set up differential drive class
     drive = new DifferentialDrive(leftLeader, rightLeader);
@@ -66,7 +67,7 @@ public class CANDriveSubsystem extends SubsystemBase {
     rightLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     // Set config to inverted and then apply to left leader. Set Left side inverted
     // so that postive values drive both sides forward
-    config.inverted(true);
+    config.inverted(true);//true
     leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
@@ -78,5 +79,10 @@ public class CANDriveSubsystem extends SubsystemBase {
   public Command driveArcade(DoubleSupplier xSpeed, DoubleSupplier zRotation) {
     return this.run(
         () -> drive.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble()));
+  }
+
+  // Changes the driving speed
+  public Command change_driving_speed(Double amount) {
+    return this.run(() -> drive_speed_multiplier += amount);
   }
 }

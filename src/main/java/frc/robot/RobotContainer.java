@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import static frc.robot.Constants.OperatorConstants.*;
+import static frc.robot.Constants.Variables.*;
+
 import static frc.robot.Constants.FuelConstants.*;
 import frc.robot.commands.Autos;
 import frc.robot.subsystems.CANDriveSubsystem;
@@ -77,6 +79,14 @@ public class RobotContainer {
     operatorController.a()
         .whileTrue(ballSubsystem.runEnd(() -> ballSubsystem.eject(), () -> ballSubsystem.stop()));
 
+
+    // D-Pad controls to change driving and shooting speed
+    // TODO: Add a method for viewing the current shooting and driving percentages
+    operatorController.povUp().onTrue(driveSubsystem.change_driving_speed(0.2));     // D-Pad up increases driving speed
+    operatorController.povDown().onTrue(driveSubsystem.change_driving_speed(-0.2));         // D-Pad down decreases driving speed
+    operatorController.povRight().onTrue(ballSubsystem.change_shooting_speed(0.2));  // D-Pad right increases shooting speed
+    operatorController.povLeft().onTrue(ballSubsystem.change_shooting_speed(-0.2));         // D-Pad left decreases driving speed
+    
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
     // controller. The Y axis of the controller is inverted so that pushing the
@@ -86,8 +96,8 @@ public class RobotContainer {
     // are also scaled down so the rotation is more easily controllable.
     driveSubsystem.setDefaultCommand(
         driveSubsystem.driveArcade(
-            () -> -driverController.getLeftY() * DRIVE_SCALING,
-            () -> -driverController.getRightX() * ROTATION_SCALING));
+            () -> -driverController.getLeftY() * DRIVE_SCALING * drive_speed_multiplier,
+            () -> -driverController.getRightX() * ROTATION_SCALING * drive_speed_multiplier));
   }
 
   /**
