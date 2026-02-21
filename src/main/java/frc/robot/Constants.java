@@ -63,8 +63,8 @@ public final class Constants {
 
     // This value is multiplied by the joystick value when driving the robot to
     // help avoid driving and turning too fast and being difficult to control
-    public static final double DRIVE_SCALING = .75;
-    public static final double ROTATION_SCALING = 0.6;
+    public static final double DRIVE_SCALING = .5;
+    public static final double ROTATION_SCALING = 0.5;
   }
 
   public static final class Variables {
