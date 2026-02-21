@@ -14,6 +14,8 @@ package frc.robot;
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
  */
+
+
 public final class Constants {
   public static final class DriveConstants {
     // Motor controller IDs for drivetrain motors
@@ -36,7 +38,6 @@ public final class Constants {
     // Current limit and nominal voltage for fuel mechanism motors.
     public static final int FEEDER_MOTOR_CURRENT_LIMIT = 60;
     public static final int LAUNCHER_MOTOR_CURRENT_LIMIT = 60;
-
     // Voltage values for various fuel operations. These values may need to be tuned
     // based on exact robot construction.
     // See the Software Guide for tuning information
@@ -48,12 +49,13 @@ public final class Constants {
     // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.75; // mid-field distance - 96in from front of robot.
     // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.25; // mid-field distance - 84in from front of robot.
     // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.00; // mid-field distance - 72in from front of robot.
-    public static final double LAUNCHING_LAUNCHER_VOLTAGE = -8.00; // mid-field distance - 36in from front of robot.
+    public static double LAUNCHING_LAUNCHER_VOLTAGE = -8.00; // mid-field distance - 36in from front of robot.
     public static final double SPIN_UP_FEEDER_VOLTAGE = 6;
     public static final double SPIN_UP_SECONDS = 1.5;
   }
 
   public static final class OperatorConstants {
+
     // Port constants for driver and operator controllers. These should match the
     // values in the Joystick tab of the Driver Station software
     public static final int DRIVER_CONTROLLER_PORT = 0;
