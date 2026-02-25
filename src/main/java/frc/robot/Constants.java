@@ -52,6 +52,9 @@ public final class Constants {
     public static double LAUNCHING_LAUNCHER_VOLTAGE = -8.00; // mid-field distance - 36in from front of robot.
     public static final double SPIN_UP_FEEDER_VOLTAGE = 6;
     public static final double SPIN_UP_SECONDS = 1.5;
+
+    public static final double DRIVE_SPEED_MUL_NORMAL = -1;
+    public static final double DRIVE_SPEED_MUL_FAST = -2;
   }
 
   public static final class OperatorConstants {
@@ -68,7 +71,7 @@ public final class Constants {
   }
 
   public static final class Variables {
-    public static double drive_speed_multiplier = -1.0;  // Allows for variable driving speed.
+    public static double drive_speed_multiplier = FuelConstants.DRIVE_SPEED_MUL_NORMAL;  // Allows for variable driving speed.
     public static double shoot_speed_multiplier = -1.0;  // Allows for variable speed shooting.
     public static double y_angle_offset = 0;
   }
