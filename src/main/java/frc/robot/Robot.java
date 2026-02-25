@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    // double tx = LimelightHelpers.getTX("limelight");
+    double tx = LimelightHelpers.getTX("limelight");
     double ty = LimelightHelpers.getTY("limelight");
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); // or your table name
     // double ntx = table.getEntry("tx").getDouble(0.0);
@@ -74,14 +74,29 @@ public class Robot extends TimedRobot {
 
     // SmartDashboard.putNumber("NT tx", ntx);
     SmartDashboard.putNumber("NT ty", nty);
-    LAUNCHING_LAUNCHER_VOLTAGE = (ty < 0.0) ? -8.0 : 0;
+    
+    if (ty < 1) {
+      LAUNCHING_LAUNCHER_VOLTAGE = -9.0;
+    }
+    else if (ty < 2) {
+      LAUNCHING_LAUNCHER_VOLTAGE = -9.25;
+    }
+    else if (ty < 3) {
+      LAUNCHING_LAUNCHER_VOLTAGE = -9.75;
+    }
+    else if (ty < 4) {
+      LAUNCHING_LAUNCHER_VOLTAGE = -10.5;
+    }
+    else if (ty < 5) {
+      LAUNCHING_LAUNCHER_VOLTAGE = -12;
+    }
+    else{
+      LAUNCHING_LAUNCHER_VOLTAGE = -8;
+    }
 
-    System.out.print("Ty and Launching_Launcher_Voltage:");
-    System.out.print(ty);
-    System.out.print(" ");
-    System.out.print(LAUNCHING_LAUNCHER_VOLTAGE);
-    System.out.print("\n");
-    // SmartDashboard.putNumber("Limelight TX", tx);
+    
+
+    SmartDashboard.putNumber("Limelight TX", tx);
     // SmartDashboard.putNumber("Limelight TY", ty);
     // System.out.println (tx);
     // System.out.println(ty);
