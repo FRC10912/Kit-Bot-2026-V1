@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import static frc.robot.Constants.FuelConstants.*;
+import static frc.robot.Constants.Variables.y_angle_offset;
+
 import frc.robot.LimelightHelpers;
 
 /**
@@ -75,24 +77,52 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("NT tx", ntx);
     SmartDashboard.putNumber("NT ty", nty);
     
-    if (ty < 1) {
-      LAUNCHING_LAUNCHER_VOLTAGE = -9.0;
-    }
-    else if (ty < 2) {
-      LAUNCHING_LAUNCHER_VOLTAGE = -9.25;
-    }
-    else if (ty < 3) {
-      LAUNCHING_LAUNCHER_VOLTAGE = -9.75;
-    }
-    else if (ty < 4) {
-      LAUNCHING_LAUNCHER_VOLTAGE = -10.5;
-    }
-    else if (ty < 5) {
-      LAUNCHING_LAUNCHER_VOLTAGE = -12;
-    }
-    else{
-      LAUNCHING_LAUNCHER_VOLTAGE = -8;
-    }
+    if (ty != 0.0) {
+      // 36 in
+      if (ty < -7.53 + y_angle_offset) {  // -11.23
+        LAUNCHING_LAUNCHER_VOLTAGE = -8.0;
+      }
+      // 48 in
+      else if (ty < -1.46 + y_angle_offset) {  // -4.61
+        LAUNCHING_LAUNCHER_VOLTAGE = -8.3;
+      }
+      // 60 in
+      else if (ty < 3.21 + y_angle_offset) {  // 0.92
+        LAUNCHING_LAUNCHER_VOLTAGE = -8.6;
+      }
+      // 72 in
+      else if (ty < 6.49 + y_angle_offset) {  // 4.97
+        LAUNCHING_LAUNCHER_VOLTAGE = -9.0;
+      }
+      // 84 in
+      else if (ty < 8.98 + y_angle_offset) {  // 7.73
+        LAUNCHING_LAUNCHER_VOLTAGE = -9.25;
+      }
+      // 96 in
+      else if (ty < 11.09 + y_angle_offset) {  // 9.93
+        LAUNCHING_LAUNCHER_VOLTAGE = -9.75;
+      }
+      // 108 in
+      else if (ty < 12.91 + y_angle_offset) {  // 12.14
+        LAUNCHING_LAUNCHER_VOLTAGE = -10.1;
+      }
+      // 120 in
+      else if (ty < 14.36 + y_angle_offset) {  // 13.6
+        LAUNCHING_LAUNCHER_VOLTAGE = -10.5;
+      }
+      // 132 in
+      else if (ty < 15.89 + y_angle_offset) {  // 15.11
+        LAUNCHING_LAUNCHER_VOLTAGE = -11.25;
+      }
+      // 149 in
+      else if (ty < 16.65 + y_angle_offset) {  // 16.65
+        LAUNCHING_LAUNCHER_VOLTAGE = -12;
+      }
+      else{
+        LAUNCHING_LAUNCHER_VOLTAGE = -12;
+      }
+   }
+    // System.out.println(LAUNCHING_LAUNCHER_VOLTAGE);
 
     
 

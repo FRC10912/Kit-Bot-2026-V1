@@ -70,5 +70,6 @@ public final class Constants {
   public static final class Variables {
     public static double drive_speed_multiplier = -1.0;  // Allows for variable driving speed.
     public static double shoot_speed_multiplier = -1.0;  // Allows for variable speed shooting.
+    public static double y_angle_offset = 0;
   }
 }
