@@ -86,7 +86,8 @@ public class RobotContainer {
     operatorController.povDown().onTrue(driveSubsystem.change_driving_speed(-0.2));         // D-Pad down decreases driving speed
     operatorController.povRight().onTrue(ballSubsystem.change_shooting_speed(0.2));  // D-Pad right increases shooting speed
     operatorController.povLeft().onTrue(ballSubsystem.change_shooting_speed(-0.2));         // D-Pad left decreases driving speed
-    
+    operatorController.b().onTrue(driveSubsystem.align_bot());
+    operatorController.b().onFalse(driveSubsystem.run(() -> driveSubsystem.driveArcade(() -> 0, () -> 0)));
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
     // controller. The Y axis of the controller is inverted so that pushing the

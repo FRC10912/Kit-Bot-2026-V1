@@ -13,6 +13,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -84,5 +85,23 @@ public class CANDriveSubsystem extends SubsystemBase {
   // Changes the driving speed
   public Command change_driving_speed(Double amount) {
     return this.run(() -> drive_speed_multiplier += amount);
+  }
+
+  public Command align_bot() {
+    Double tx = SmartDashboard.getNumber("Limelight TX", 0);
+    if (tx > 5) {
+      System.out.println("TOO FAR LEFT");
+      return driveArcade(() -> 0.2f, () -> -0.4f);
+    }
+    else if (tx < -5) {
+      System.out.println("TOO FAR RIGHT");
+      return driveArcade(() -> -0.2f, () -> 0.4f);
+
+    }
+    else {
+      System.out.println("PERFECT!!!!!");
+      return driveArcade(() -> -0.2f, () -> 0f);
+    }
+    
   }
 }
