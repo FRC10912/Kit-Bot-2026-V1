@@ -89,18 +89,19 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   public Command align_bot() {
     Double tx = SmartDashboard.getNumber("Limelight TX", 0);
+    System.out.println(tx);
     if (tx > 5) {
-      System.out.println("TOO FAR LEFT");
-      return driveArcade(() -> 0.2f, () -> -0.4f);
+      // System.out.println("TOO FAR LEFT");
+      return driveArcade(() -> 0.1f, () -> -0.2f);
     }
     else if (tx < -5) {
-      System.out.println("TOO FAR RIGHT");
-      return driveArcade(() -> -0.2f, () -> 0.4f);
-
+      // System.out.println("TOO FAR RIGHT");
+      return driveArcade(() -> 0.2f, () -> 0.4f);
     }
     else {
       System.out.println("PERFECT!!!!!");
-      return driveArcade(() -> -0.2f, () -> 0f);
+      //   return driveArcade(() -> 0, () -> 0f);
+      return driveArcade(() -> 0, () -> 0f);
     }
     
   }
