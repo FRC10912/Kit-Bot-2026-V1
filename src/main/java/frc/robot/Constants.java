@@ -28,6 +28,10 @@ public final class Constants {
     // Current limit for drivetrain motors. 60A is a reasonable maximum to reduce
     // likelihood of tripping breakers or damaging CIM motors
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 60;
+
+    // Inverted because limelight is mounted upside down.
+    public static final int APRILTAG_TOO_FAR_LEFT_ANGLE = 5;
+    public static final int APRILTAG_TOO_FAR_RIGHT_ANGLE = -5;
   }
 
   public static final class FuelConstants {
@@ -73,6 +77,10 @@ public final class Constants {
   public static final class Variables {
     public static double drive_speed_multiplier = FuelConstants.DRIVE_SPEED_MUL_NORMAL;  // Allows for variable driving speed.
     public static double shoot_speed_multiplier = -1.0;  // Allows for variable speed shooting.
+    public static boolean override_shooting_to_max = false;
     public static double y_angle_offset = 0;
+
+    public static double x_angle = 0.0;
+    public static double y_angle = 0.0;
   }
 }

@@ -90,6 +90,8 @@ public class RobotContainer {
     operatorController.rightTrigger().onFalse(ballSubsystem.run(() -> drive_speed_multiplier = DRIVE_SPEED_MUL_NORMAL));
     operatorController.b().onTrue(driveSubsystem.align_bot());
     // operatorController.b().onFalse(driveSubsystem.runOnce(() -> driveSubsystem.driveArcade(() -> 0, () -> 0)));
+    operatorController.leftTrigger().onTrue(ballSubsystem.run(() -> override_shooting_to_max = true));
+    operatorController.leftTrigger().onFalse(ballSubsystem.run(() -> override_shooting_to_max = false));
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
     // controller. The Y axis of the controller is inverted so that pushing the

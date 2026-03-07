@@ -13,7 +13,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
+
+import static frc.robot.Constants.DriveConstants.APRILTAG_TOO_FAR_LEFT_ANGLE;
+import static frc.robot.Constants.DriveConstants.APRILTAG_TOO_FAR_RIGHT_ANGLE;
 import static frc.robot.Constants.FuelConstants.*;
+import static frc.robot.Constants.Variables.drive_speed_multiplier;
+import static frc.robot.Constants.Variables.override_shooting_to_max;
+import static frc.robot.Constants.Variables.x_angle;
+import static frc.robot.Constants.Variables.y_angle;
 import static frc.robot.Constants.Variables.y_angle_offset;
 
 import frc.robot.LimelightHelpers;
@@ -48,6 +55,27 @@ public class Robot extends TimedRobot {
     HAL.report(tResourceType.kResourceType_Framework, 10);
   }
 
+  protected void pushSmartDashboard() {
+    SmartDashboard.putNumber("Limelight TX", x_angle);
+    SmartDashboard.putNumber("Limelight TY", y_angle);
+    SmartDashboard.putNumber("Current Shooting Voltage", LAUNCHING_LAUNCHER_VOLTAGE);
+    SmartDashboard.putNumber("April Tag Left Center Angle", APRILTAG_TOO_FAR_LEFT_ANGLE);
+    SmartDashboard.putNumber("April Tag Current Angle", x_angle);
+    SmartDashboard.putNumber("April Tag Right Center Angle", APRILTAG_TOO_FAR_RIGHT_ANGLE);
+    
+    // reversed because camera is mounted upside down
+    if (APRILTAG_TOO_FAR_LEFT_ANGLE >= x_angle && x_angle >= APRILTAG_TOO_FAR_RIGHT_ANGLE && x_angle != 0)
+    {
+      SmartDashboard.putBoolean("Optimal Shooting Angle", true);
+    }
+    else
+    {
+      SmartDashboard.putBoolean("Optimal Shooting Angle", false);
+    }
+    SmartDashboard.putBoolean("Turbo Enabled", drive_speed_multiplier == DRIVE_SPEED_MUL_FAST);
+    SmartDashboard.putBoolean("Overriding Shooting Speed to Max", override_shooting_to_max);
+  }
+
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items
    * like diagnostics
@@ -72,65 +100,68 @@ public class Robot extends TimedRobot {
     double ty = LimelightHelpers.getTY("limelight");
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); // or your table name
     // double ntx = table.getEntry("tx").getDouble(0.0);
-    double nty = table.getEntry("ty").getDouble(0.0);
+    // double nty = table.getEntry("ty").getDouble(0.0);
 
-    // SmartDashboard.putNumber("NT tx", ntx);
-    SmartDashboard.putNumber("NT ty", nty);
-    
-    if (ty != 0.0) {
-      // 36 in
-      if (ty < -7.53 + y_angle_offset) {  // -11.23
-        LAUNCHING_LAUNCHER_VOLTAGE = -8.0;
-      }
-      // 48 in
-      else if (ty < -1.46 + y_angle_offset) {  // -4.61
-        LAUNCHING_LAUNCHER_VOLTAGE = -8.3;
-      }
-      // 60 in
-      else if (ty < 3.21 + y_angle_offset) {  // 0.92
-        LAUNCHING_LAUNCHER_VOLTAGE = -8.6;
-      }
-      // 72 in
-      else if (ty < 6.49 + y_angle_offset) {  // 4.97
-        LAUNCHING_LAUNCHER_VOLTAGE = -9.0;
-      }
-      // 84 in
-      else if (ty < 8.98 + y_angle_offset) {  // 7.73
-        LAUNCHING_LAUNCHER_VOLTAGE = -9.25;
-      }
-      // 96 in
-      else if (ty < 11.09 + y_angle_offset) {  // 9.93
-        LAUNCHING_LAUNCHER_VOLTAGE = -9.75;
-      }
-      // 108 in
-      else if (ty < 12.91 + y_angle_offset) {  // 12.14
-        LAUNCHING_LAUNCHER_VOLTAGE = -10.1;
-      }
-      // 120 in
-      else if (ty < 14.36 + y_angle_offset) {  // 13.6
-        LAUNCHING_LAUNCHER_VOLTAGE = -10.5;
-      }
-      // 132 in
-      else if (ty < 15.89 + y_angle_offset) {  // 15.11
-        LAUNCHING_LAUNCHER_VOLTAGE = -11.25;
-      }
-      // 149 in
-      else if (ty < 16.65 + y_angle_offset) {  // 16.65
-        LAUNCHING_LAUNCHER_VOLTAGE = -12;
-      }
-      else{
-        LAUNCHING_LAUNCHER_VOLTAGE = -12;
-      }
+    // SmartDashboard.putNumber("NT tx", ntx);   
+    if (!override_shooting_to_max){ 
+      if (ty != 0.0) {
+        // 36 in
+        if (ty < -7.53 + y_angle_offset) {  // -11.23
+          LAUNCHING_LAUNCHER_VOLTAGE = -8.0;
+        }
+        // 48 in
+        else if (ty < -1.46 + y_angle_offset) {  // -4.61
+          LAUNCHING_LAUNCHER_VOLTAGE = -8.3;
+        }
+        // 60 in
+        else if (ty < 3.21 + y_angle_offset) {  // 0.92
+          LAUNCHING_LAUNCHER_VOLTAGE = -8.6;
+        }
+        // 72 in
+        else if (ty < 6.49 + y_angle_offset) {  // 4.97
+          LAUNCHING_LAUNCHER_VOLTAGE = -9.0;
+        }
+        // 84 in
+        else if (ty < 8.98 + y_angle_offset) {  // 7.73
+          LAUNCHING_LAUNCHER_VOLTAGE = -9.25;
+        }
+        // 96 in
+        else if (ty < 11.09 + y_angle_offset) {  // 9.93
+          LAUNCHING_LAUNCHER_VOLTAGE = -9.75;
+        }
+        // 108 in
+        else if (ty < 12.91 + y_angle_offset) {  // 12.14
+          LAUNCHING_LAUNCHER_VOLTAGE = -10.1;
+        }
+        // 120 in
+        else if (ty < 14.36 + y_angle_offset) {  // 13.6
+          LAUNCHING_LAUNCHER_VOLTAGE = -10.5;
+        }
+        // 132 in
+        else if (ty < 15.89 + y_angle_offset) {  // 15.11
+          LAUNCHING_LAUNCHER_VOLTAGE = -11.25;
+        }
+        // 149 in
+        else if (ty < 16.65 + y_angle_offset) {  // 16.65
+          LAUNCHING_LAUNCHER_VOLTAGE = -12;
+        }
+        else{
+          LAUNCHING_LAUNCHER_VOLTAGE = -12;
+        }
+    }
+   } else {
+    LAUNCHING_LAUNCHER_VOLTAGE = -12;
    }
+   
     // System.out.println(LAUNCHING_LAUNCHER_VOLTAGE);
 
     
-
-    SmartDashboard.putNumber("Limelight TX", tx);
+    y_angle = ty;
+    x_angle = tx;
     // SmartDashboard.putNumber("Limelight TY", ty);
     // System.out.println (tx);
     // System.out.println(ty);
-
+    pushSmartDashboard();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
