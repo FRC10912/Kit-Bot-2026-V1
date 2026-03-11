@@ -11,14 +11,18 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
 import static frc.robot.Constants.DriveConstants.*;
-import static frc.robot.Constants.Variables.drive_speed_multiplier;;
+import static frc.robot.Constants.OperatorConstants.DRIVE_SCALING;
+import static frc.robot.Constants.OperatorConstants.ROTATION_SCALING;
+import static frc.robot.Constants.Variables.drive_speed_multiplier;
+import static frc.robot.Constants.Variables.x_angle;;
 
 public class CANDriveSubsystem extends SubsystemBase {
   private final SparkMax leftLeader;
@@ -34,6 +38,7 @@ public class CANDriveSubsystem extends SubsystemBase {
     leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushless);
     rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushless);
     rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushless);
+    
 
     // set up differential drive class
     drive = new DifferentialDrive(leftLeader, rightLeader);
@@ -52,6 +57,7 @@ public class CANDriveSubsystem extends SubsystemBase {
     // battery). The current limit helps prevent tripping
     // breakers.
     SparkMaxConfig config = new SparkMaxConfig();
+    config.idleMode(IdleMode.kBrake);
     config.voltageCompensation(12);
     config.smartCurrentLimit(DRIVE_MOTOR_CURRENT_LIMIT);
 
@@ -88,14 +94,18 @@ public class CANDriveSubsystem extends SubsystemBase {
   }
 
   public Command align_bot() {
-    Double tx = SmartDashboard.getNumber("Limelight TX", 0);
-    System.out.println(tx);
-    if (tx > 5) {
-      // System.out.println("TOO FAR LEFT");
-      return driveArcade(() -> 0.1f, () -> -0.2f);
+    System.out.println(x_angle);
+    Double tx = x_angle;
+    if (tx == 0){
+      System.out.println("No Limelight Detected");
+      return driveArcade(() -> 0, () -> 0);
     }
-    else if (tx < -5) {
-      // System.out.println("TOO FAR RIGHT");
+    else if (tx > APRILTAG_TOO_FAR_LEFT_ANGLE) {
+      System.out.println("TOO FAR LEFT");
+      return driveArcade(() -> 0.2f, () -> -0.4f);
+    }
+    else if (tx < APRILTAG_TOO_FAR_RIGHT_ANGLE) {
+      System.out.println("TOO FAR RIGHT");
       return driveArcade(() -> 0.2f, () -> 0.4f);
     }
     else {

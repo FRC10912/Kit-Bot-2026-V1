@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.FuelConstants.SPIN_UP_SECONDS;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.CANFuelSubsystem;
@@ -16,13 +18,13 @@ public final class Autos {
         // Drive backwards for .25 seconds. The driveArcadeAuto command factory
         // creates a command which does not end which allows us to control
         // the timing using the withTimeout decorator
-        driveSubsystem.driveArcade(() -> 0.5, () -> 0).withTimeout(.25),
+        driveSubsystem.driveArcade(() -> 0.5, () -> 0).withTimeout(0.75),
         // Stop driving. This line uses the regular driveArcade command factory so it
         // ends immediately after commanding the motors to stop
-        driveSubsystem.driveArcade(() -> 0, () -> 0),
+        driveSubsystem.driveArcade(() -> 0, () -> 0).withTimeout(0.1),
         // Spin up the launcher for 1 second and then launch balls for 9 seconds, for a
         // total of 10 seconds
-        ballSubsystem.spinUpCommand().withTimeout(1),
+        ballSubsystem.spinUpCommand().withTimeout(SPIN_UP_SECONDS),
         ballSubsystem.launchCommand().withTimeout(9),
         // Stop running the launcher
         ballSubsystem.runOnce(() -> ballSubsystem.stop()));

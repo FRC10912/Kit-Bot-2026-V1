@@ -76,7 +76,12 @@ public class CANFuelSubsystem extends SubsystemBase {
 
   // A method to stop the rollers
   public void stop() {
-    feederRoller.set(0);
+    feederRoller.set(0.0);
+    intakeLauncherRoller.set(0);
+  }
+
+  public void idle_feeder() {
+    feederRoller.set(0.2);
     intakeLauncherRoller.set(0);
   }
 
