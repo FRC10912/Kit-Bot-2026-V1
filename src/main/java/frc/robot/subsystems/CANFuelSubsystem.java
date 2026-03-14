@@ -91,7 +91,7 @@ public class CANFuelSubsystem extends SubsystemBase {
     feederRoller
         .setVoltage(SmartDashboard.getNumber("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE));
     intakeLauncherRoller
-        .setVoltage(SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE * shoot_speed_multiplier));
+        .setVoltage(-SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE * shoot_speed_multiplier));
   }
 
   // A command factory to turn the spinUp method into a command that requires this
