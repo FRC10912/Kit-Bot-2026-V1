@@ -102,51 +102,53 @@ public class Robot extends TimedRobot {
     // double ntx = table.getEntry("tx").getDouble(0.0);
     // double nty = table.getEntry("ty").getDouble(0.0);
 
+
+    double shooter_offset = 0.1;
     // SmartDashboard.putNumber("NT tx", ntx);   
     if (!override_shooting_to_max){ 
       if (ty != 0.0) {
         // 36 in
         if (ty < -7.53 + y_angle_offset) {  // -11.23
-          LAUNCHING_LAUNCHER_VOLTAGE = -8.0;
+          LAUNCHING_LAUNCHER_VOLTAGE = -8.3 + shooter_offset;
         }
         // 48 in
         else if (ty < -1.46 + y_angle_offset) {  // -4.61
-          LAUNCHING_LAUNCHER_VOLTAGE = -8.3;
+          LAUNCHING_LAUNCHER_VOLTAGE = -8.6 + shooter_offset;
         }
         // 60 in
         else if (ty < 3.21 + y_angle_offset) {  // 0.92
-          LAUNCHING_LAUNCHER_VOLTAGE = -8.6;
+          LAUNCHING_LAUNCHER_VOLTAGE = -9.0 + shooter_offset;
         }
         // 72 in
         else if (ty < 6.49 + y_angle_offset) {  // 4.97
-          LAUNCHING_LAUNCHER_VOLTAGE = -9.0;
+          LAUNCHING_LAUNCHER_VOLTAGE = -9.25 + shooter_offset;
         }
         // 84 in
         else if (ty < 8.98 + y_angle_offset) {  // 7.73
-          LAUNCHING_LAUNCHER_VOLTAGE = -9.25;
+          LAUNCHING_LAUNCHER_VOLTAGE = -9.75 + shooter_offset;
         }
         // 96 in
         else if (ty < 11.09 + y_angle_offset) {  // 9.93
-          LAUNCHING_LAUNCHER_VOLTAGE = -9.75;
+          LAUNCHING_LAUNCHER_VOLTAGE = -10.1 + shooter_offset;
         }
         // 108 in
         else if (ty < 12.91 + y_angle_offset) {  // 12.14
-          LAUNCHING_LAUNCHER_VOLTAGE = -10.1;
+          LAUNCHING_LAUNCHER_VOLTAGE = -10.5 + shooter_offset;
         }
         // 120 in
         else if (ty < 14.36 + y_angle_offset) {  // 13.6
-          LAUNCHING_LAUNCHER_VOLTAGE = -10.5;
+          LAUNCHING_LAUNCHER_VOLTAGE = -11.25 + shooter_offset;
         }
         // 132 in
         else if (ty < 15.89 + y_angle_offset) {  // 15.11
-          LAUNCHING_LAUNCHER_VOLTAGE = -11.25;
+          LAUNCHING_LAUNCHER_VOLTAGE = -12 + shooter_offset;
         }
         // 149 in
         else if (ty < 16.65 + y_angle_offset) {  // 16.65
-          LAUNCHING_LAUNCHER_VOLTAGE = -12;
+          LAUNCHING_LAUNCHER_VOLTAGE = -12 + shooter_offset;
         }
         else{
-          LAUNCHING_LAUNCHER_VOLTAGE = -12;
+          LAUNCHING_LAUNCHER_VOLTAGE = -12 + shooter_offset;
         }
     }
    } else {
