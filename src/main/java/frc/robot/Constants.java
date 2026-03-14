@@ -55,7 +55,7 @@ public final class Constants {
     // public static final double LAUNCHING_LAUNCHER_VOLTAGE = -9.00; // mid-field distance - 72in from front of robot.
     public static double LAUNCHING_LAUNCHER_VOLTAGE = -8.00; // mid-field distance - 36in from front of robot.
     public static final double SPIN_UP_FEEDER_VOLTAGE = 6;
-    public static final double SPIN_UP_SECONDS = 0.5;
+    public static final double SPIN_UP_SECONDS = 0.65;
 
     public static final double DRIVE_SPEED_MUL_NORMAL = -1;
     public static final double DRIVE_SPEED_MUL_FAST = -2;
