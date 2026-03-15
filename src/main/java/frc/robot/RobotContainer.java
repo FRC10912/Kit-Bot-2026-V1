@@ -104,7 +104,7 @@ public class RobotContainer {
     driveSubsystem.setDefaultCommand(
         driveSubsystem.driveArcade(
             () -> -driverController.getLeftY() * DRIVE_SCALING * drive_speed_multiplier,
-            () -> -driverController.getRightX() * ROTATION_SCALING * drive_speed_multiplier));
+            () -> -driverController.getRightX() * ROTATION_SCALING * drive_speed_multiplier + (operatorController.getLeftTriggerAxis() * x_angle * auto_aim_kp)));
   }
 
   /**
