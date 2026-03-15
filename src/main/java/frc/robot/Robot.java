@@ -159,7 +159,8 @@ public class Robot extends TimedRobot {
 
     
     y_angle = ty;
-    x_angle = tx;
+    // Limelight upsidedown
+    x_angle = -tx;
     // SmartDashboard.putNumber("Limelight TY", ty);
     // System.out.println (tx);
     // System.out.println(ty);
