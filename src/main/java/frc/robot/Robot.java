@@ -4,12 +4,18 @@
 
 package frc.robot;
 
+import static frc.robot.Constants.DriveConstants.DRIVE_SPEED_MUL_FAST;
+import static frc.robot.Constants.DriveConstants.DRIVE_SPEED_MUL_NORMAL;
+import static frc.robot.Constants.DriveConstants.drive_speed_multiplier;
+import static frc.robot.Constants.OperatorConstants.DRIVER_CONTROLLER_PORT;
+
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +30,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private final CommandXboxController driverController = new CommandXboxController(
+      DRIVER_CONTROLLER_PORT);
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -105,6 +114,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    if (driverController.getRightTriggerAxis() >= 0.5) {
+      drive_speed_multiplier = DRIVE_SPEED_MUL_FAST;
+    } else {
+      drive_speed_multiplier = DRIVE_SPEED_MUL_NORMAL;
+    }
   }
 
   @Override

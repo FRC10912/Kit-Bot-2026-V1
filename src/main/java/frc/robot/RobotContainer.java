@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import static frc.robot.Constants.OperatorConstants.*;
-import static frc.robot.Constants.FuelConstants.*;
+import static frc.robot.Constants.DriveConstants.DRIVE_SPEED_MUL_FAST;
+import static frc.robot.Constants.DriveConstants.DRIVE_SPEED_MUL_NORMAL;
+import static frc.robot.Constants.DriveConstants.drive_speed_multiplier;
 import frc.robot.commands.Autos;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
@@ -32,8 +34,8 @@ public class RobotContainer {
       DRIVER_CONTROLLER_PORT);
 
   // // The operator's controller
-  // private final CommandXboxController operatorController = new CommandXboxController(
-  //     OPERATOR_CONTROLLER_PORT);
+  private final CommandXboxController operatorController = new CommandXboxController(
+      OPERATOR_CONTROLLER_PORT);
 
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -76,7 +78,8 @@ public class RobotContainer {
     // // the intake
     // operatorController.a()
     //     .whileTrue(ballSubsystem.runEnd(() -> ballSubsystem.eject(), () -> ballSubsystem.stop()));
-
+    // operatorController.rightTrigger().onTrue(driveSubsystem.run(() -> driveSubsystem.setDriveSpeed(DRIVE_SPEED_MUL_FAST)));
+    // operatorController.rightTrigger().onFalse(driveSubsystem.run(() -> drive_speed_multiplier = DRIVE_SPEED_MUL_NORMAL));
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
     // controller. The Y axis of the controller is inverted so that pushing the
@@ -86,8 +89,8 @@ public class RobotContainer {
     // are also scaled down so the rotation is more easily controllable.
     driveSubsystem.setDefaultCommand(
         driveSubsystem.driveArcade(
-            () -> driverController.getLeftY() * DRIVE_SCALING,
-            () -> driverController.getRightX() * ROTATION_SCALING));
+            () -> -driverController.getLeftY() * DRIVE_SCALING * drive_speed_multiplier,
+            () -> -driverController.getRightX() * ROTATION_SCALING * drive_speed_multiplier));
   }
 
   /**

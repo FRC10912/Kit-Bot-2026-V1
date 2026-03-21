@@ -20,6 +20,12 @@ public final class Constants {
     public static final int LEFT_LEADER_ID = 1;
     public static final int RIGHT_LEADER_ID = 2;
 
+    public static final double DRIVE_SPEED_MUL_NORMAL = -1;
+    public static final double DRIVE_SPEED_MUL_FAST = -2;
+
+    public static double drive_speed_multiplier = DRIVE_SPEED_MUL_NORMAL;  // Allows for variable driving speed.
+
+
     // Current limit for drivetrain motors. 60A is a reasonable maximum to reduce
     // likelihood of tripping breakers or damaging CIM motors
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 60;
@@ -50,7 +56,7 @@ public final class Constants {
     // Port constants for driver and operator controllers. These should match the
     // values in the Joystick tab of the Driver Station software
     public static final int DRIVER_CONTROLLER_PORT = 0;
-    public static final int OPERATOR_CONTROLLER_PORT = 1;
+    public static final int OPERATOR_CONTROLLER_PORT = 0;
 
     // This value is multiplied by the joystick value when driving the robot to
     // help avoid driving and turning too fast and being difficult to control
