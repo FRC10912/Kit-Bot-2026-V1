@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import static frc.robot.Constants.DriveConstants.APRILTAG_TOO_FAR_LEFT_ANGLE;
 import static frc.robot.Constants.DriveConstants.APRILTAG_TOO_FAR_RIGHT_ANGLE;
 import static frc.robot.Constants.FuelConstants.*;
+import static frc.robot.Constants.Variables.auto_aim_influence;
+import static frc.robot.Constants.Variables.auto_aim_kp;
 import static frc.robot.Constants.Variables.drive_speed_multiplier;
 import static frc.robot.Constants.Variables.override_shooting_to_max;
 import static frc.robot.Constants.Variables.x_angle;
@@ -99,6 +101,9 @@ public class Robot extends TimedRobot {
     double tx = LimelightHelpers.getTX("limelight");
     double ty = LimelightHelpers.getTY("limelight");
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); // or your table name
+    y_angle = ty;
+    // Limelight upsidedown
+    x_angle = -tx;
     // double ntx = table.getEntry("tx").getDouble(0.0);
     // double nty = table.getEntry("ty").getDouble(0.0);
 
@@ -156,11 +161,20 @@ public class Robot extends TimedRobot {
    }
    
     // System.out.println(LAUNCHING_LAUNCHER_VOLTAGE);
-
+    // Calculate auto aim influence
+    auto_aim_influence = x_angle * auto_aim_kp;
+    auto_aim_influence = Math.min(auto_aim_influence, 0.3);
+    auto_aim_influence = Math.max(auto_aim_influence, -0.3);
+    double minimum = 0.12;
+    if (auto_aim_influence != 0 && Math.abs(auto_aim_influence) <= minimum) {
+      if (auto_aim_influence < 0){
+        auto_aim_influence = -minimum;
+      } else {
+        auto_aim_influence = minimum;
+      }
+    }
+    System.out.println(auto_aim_influence);
     
-    y_angle = ty;
-    // Limelight upsidedown
-    x_angle = -tx;
     // SmartDashboard.putNumber("Limelight TY", ty);
     // System.out.println (tx);
     // System.out.println(ty);

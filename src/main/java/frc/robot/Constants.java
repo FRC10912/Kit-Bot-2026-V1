@@ -83,6 +83,7 @@ public final class Constants {
     public static double x_angle = 0.0;
     public static double y_angle = 0.0;
 
+    public static double auto_aim_influence = 0;
     public static final double auto_aim_kp = 0.025;
   }
 }
