@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import static frc.robot.Constants.FuelConstants.SPIN_UP_SECONDS;
+import static frc.robot.Constants.Variables.auto_aim_influence;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -28,13 +29,11 @@ public final class Autos {
         ballSubsystem.launchCommand().withTimeout(6),
         ballSubsystem.runOnce(() -> ballSubsystem.stop()),
         // Intake and drive back for 3.25
-        ballSubsystem.intakeCommand().alongWith(driveSubsystem.driveArcade(() -> 0.5, () -> 0)).withTimeout(3),
-        
+        ballSubsystem.intakeCommand().alongWith(driveSubsystem.driveArcade(() -> 0.4, () -> 0)).withTimeout(3),
         // Stop for 2 seconds
         driveSubsystem.driveArcade(() -> 0, () -> 0).withTimeout(2),
-
         // drive forward for 2.5s
-        driveSubsystem.driveArcade(() -> -0.5, () -> 0).withTimeout(3),
+        driveSubsystem.driveArcade(() -> -0.4, () -> auto_aim_influence).withTimeout(3),
         // shoot
         ballSubsystem.runOnce(() -> ballSubsystem.stop()),
         ballSubsystem.spinUpCommand().withTimeout(SPIN_UP_SECONDS),
