@@ -88,6 +88,8 @@ public class RobotContainer {
     // operatorController.povLeft().onTrue(ballSubsystem.change_shooting_speed(-0.05));         // D-Pad left decreases driving speed
     operatorController.rightTrigger().onTrue(ballSubsystem.run(() -> drive_speed_multiplier = DRIVE_SPEED_MUL_FAST));
     operatorController.rightTrigger().onFalse(ballSubsystem.run(() -> drive_speed_multiplier = DRIVE_SPEED_MUL_NORMAL));
+    // operatorController.leftTrigger().onTrue(ballSubsystem.run(() -> drive_speed_multiplier = DRIVE_SPEED_MUL_SLOW));
+    // operatorController.leftTrigger().onFalse(ballSubsystem.run(() -> drive_speed_multiplier = DRIVE_SPEED_MUL_NORMAL));
     // operatorController.b().onTrue(driveSubsystem.align_bot());
     // operatorController.b().onTrue(driveSubsystem.run(() -> driveSubsystem.align_bot()));
     // operatorController.b().onFalse(driveSubsystem.runOnce(() -> driveSubsystem.driveArcade(() -> 0, () -> 0)));
