@@ -29,9 +29,9 @@ public final class Autos {
         ballSubsystem.launchCommand().withTimeout(6),
         ballSubsystem.runOnce(() -> ballSubsystem.stop()),
         // Intake and drive back for 3.25
-        ballSubsystem.intakeCommand().alongWith(driveSubsystem.driveArcade(() -> 0.4, () -> 0)).withTimeout(3),
+        ballSubsystem.intakeCommand().alongWith(driveSubsystem.driveArcade(() -> 0.4, () -> 0)).withTimeout(5), // was zero made 5 by adding two from below
         // Stop for 2 seconds
-        driveSubsystem.driveArcade(() -> 0, () -> 0).withTimeout(2),
+        driveSubsystem.driveArcade(() -> 0, () -> 0).withTimeout(0),// was 2 making zero
         // drive forward for 2.5s
         driveSubsystem.driveArcade(() -> -0.4, () -> auto_aim_influence).withTimeout(3),
         // shoot
